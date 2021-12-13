@@ -15,7 +15,7 @@ namespace PhoneBook
             while (!CloseApp)
             {
                 Console.WriteLine();
-                SetColor(ConsoleColor.Cyan, 
+                SetColor(ConsoleColor.Cyan,
                     "1 - Add contact\n" +
                     "2 - Display contact by number\n" +
                     "3 - Display all contacts\n" +
@@ -31,7 +31,7 @@ namespace PhoneBook
                     case "1":
                         SetColor(ConsoleColor.Yellow, "Insert Number: ");
                         var numberInput = Console.ReadLine();
-                       
+
                         bool IsDigitsOnly(string number)
                         {
                             foreach (char c in number)
@@ -41,19 +41,15 @@ namespace PhoneBook
                             }
                             return true;
                         }
-                       
-                        string number = null;
-                        
 
+                        string number = null;
                         if (numberInput.Length >= 9 && IsDigitsOnly(numberInput))
                             number = numberInput;
                         else
                         {
                             SetColor(ConsoleColor.Red, "The number has to contains only digits and the minimum length is 9.");
-
                             break;
                         }
-
                         SetColor(ConsoleColor.Yellow, "Insert Name: ");
                         var nameInput = Console.ReadLine();
                         string name = null;
@@ -64,9 +60,7 @@ namespace PhoneBook
                             SetColor(ConsoleColor.Red, "Minimum length of name is 3 chars. Please try again.");
                             break;
                         }
-
                         var newContact = new Contact(name, number);
-
                         phonebook.AddContact(newContact);
                         break;
 
@@ -75,40 +69,32 @@ namespace PhoneBook
                         var numberToSearch = Console.ReadLine();
                         phonebook.DisplayContact(numberToSearch);
                         break;
+
                     case "3":
                         phonebook.DisplayAllContacts();
-                        
                         break;
+
                     case "4":
                         SetColor(ConsoleColor.Yellow, "Insert Name: ");
                         var nameToSearch = Console.ReadLine();
                         phonebook.DisplayMatchingContacts(nameToSearch);
                         break;
+
                     case "5":
                         SetColor(ConsoleColor.Yellow, "Insert Number to delete: ");
                         var numberToDelete = Console.ReadLine();
                         phonebook.DeleteByNumber(numberToDelete);
                         break;
+
                     case "X":
                         CloseApp = true;
-
                         break;
+
                     default:
                         SetColor(ConsoleColor.Red, "Invalid operation.\n");
                         continue;
                 }
-
-                //Console.ForegroundColor = ConsoleColor.Yellow;
-                //Console.WriteLine("\n\n1 - Main Menu\nX or any other - Close the App");
-                //Console.ResetColor();
-                //var userInput2 = Console.ReadLine();
-                //if (userInput2 == "1")
-                //    CloseApp = false;
-                //else
-                //    CloseApp = true;
-                //Console.Clear();
             }
-
         }
 
         private static void SetColor(ConsoleColor color, string text)
